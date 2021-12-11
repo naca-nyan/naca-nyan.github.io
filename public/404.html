@@ -12,15 +12,9 @@
       <strong> JavaScript を有効にしてから出直してきてください。 </strong>
     </noscript>
     <script>
-      let segmentCount = 1;
-      let l = window.location;
-      let port = l.port ? ":" + l.port : "";
-      l.replace(
-        `${l.protocol}//${l.hostname}${port}/?p=${l.pathname
-          .split("/")
-          .slice(0, 1 + segmentCount)
-          .join("/")}`
-      );
+      (function (l) {
+        l.replace(l.origin + "/?p=" + l.pathname);
+      })(window.location);
     </script>
   </body>
 </html>

@@ -19,9 +19,6 @@ header {
   display: flex;
   border-bottom: solid #fbfbfb 5px;
 }
-header a:hover {
-  border-bottom: none;
-}
 .logo-container {
   width: 50px;
   height: 50px;

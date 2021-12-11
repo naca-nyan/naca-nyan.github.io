@@ -38,30 +38,30 @@ export default class Converter extends Vue {
   private internal_semitone = 0;
   private internal_percent = 100;
   ms = 500;
-  get semitone() {
+  get semitone(): number {
     return this.internal_semitone;
   }
-  set semitone(val) {
+  set semitone(val: number) {
     this.internal_semitone = val;
     this.internal_percent = Math.pow(2, val / 12) * 100;
   }
-  get percent() {
+  get percent(): number {
     return this.internal_percent;
   }
-  set percent(val) {
+  set percent(val: number) {
     this.internal_percent = val;
     this.internal_semitone = Math.log2(val / 100) * 12;
   }
-  get bpm() {
+  get bpm(): number {
     return this.hz * 60;
   }
-  set bpm(val) {
+  set bpm(val: number) {
     this.hz = val / 60;
   }
-  get hz() {
+  get hz(): number {
     return 1000 / this.ms;
   }
-  set hz(val) {
+  set hz(val: number) {
     this.ms = 1000 / val;
   }
 }

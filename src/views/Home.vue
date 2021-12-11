@@ -28,8 +28,8 @@
     <hr />
     <p>作ったやつ</p>
     <ul>
-      <li><a href="/converter/">いろいろ変換するやつ</a></li>
-      <li><a href="/bpm/">ぽちぽちしてBPM計測するやつ</a></li>
+      <li><router-link to="/converter/">いろいろ変換するやつ</router-link></li>
+      <li><router-link to="/bpm/">ぽちぽちしてBPM計測するやつ</router-link></li>
     </ul>
   </div>
 </template>

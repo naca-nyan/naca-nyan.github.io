@@ -1,7 +1,9 @@
 <template>
   <header>
     <div class="logo-container">
-      <a href="/"><img class="logo" src="../assets/icon.png" alt="icon" /></a>
+      <router-link to="/">
+        <img class="logo" src="../assets/icon.png" alt="icon" />
+      </router-link>
     </div>
   </header>
 </template>

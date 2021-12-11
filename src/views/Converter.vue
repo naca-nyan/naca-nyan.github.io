@@ -3,7 +3,7 @@
     <Header />
     <h1>いろいろ変換するやつ</h1>
     <hr />
-    <main id="converter">
+    <main>
       <h4>ボイチェンの％と半音単位こんばーた</h4>
       <p>
         <label>パーセント</label>
@@ -25,64 +25,46 @@
   </body>
 </template>
 
-<script>
-import { createApp } from "vue";
+<script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import Header from "@/components/Header.vue"
-
-const ConverterConfig = {
-  data() {
-    return {
-      _semitone: 0,
-      _percent: 100,
-      ms: 500,
-    };
-  },
-  computed: {
-    semitone: {
-      get() {
-        return this._semitone;
-      },
-      set(val) {
-        this._semitone = val;
-        this._percent = Math.pow(2, val / 12) * 100;
-      },
-    },
-    percent: {
-      get() {
-        return this._percent;
-      },
-      set(val) {
-        this._percent = val;
-        this._semitone = Math.log2(val / 100) * 12;
-      },
-    },
-    bpm: {
-      get() {
-        return this.hz * 60;
-      },
-      set(val) {
-        this.hz = val / 60;
-      },
-    },
-    hz: {
-      get() {
-        return 1000 / this.ms;
-      },
-      set(val) {
-        this.ms = 1000 / val;
-      },
-    },
-  },
-};
-createApp(ConverterConfig).mount("#converter");
+import Header from "@/components/Header.vue";
 
 @Options({
   components: {
     Header,
-  }
+  },
 })
-export default class Converter extends Vue {}
+export default class Converter extends Vue {
+  private internal_semitone = 0;
+  private internal_percent = 100;
+  ms = 500;
+  get semitone() {
+    return this.internal_semitone;
+  }
+  set semitone(val) {
+    this.internal_semitone = val;
+    this.internal_percent = Math.pow(2, val / 12) * 100;
+  }
+  get percent() {
+    return this.internal_percent;
+  }
+  set percent(val) {
+    this.internal_percent = val;
+    this.internal_semitone = Math.log2(val / 100) * 12;
+  }
+  get bpm() {
+    return this.hz * 60;
+  }
+  set bpm(val) {
+    this.hz = val / 60;
+  }
+  get hz() {
+    return 1000 / this.ms;
+  }
+  set hz(val) {
+    this.ms = 1000 / val;
+  }
+}
 </script>
 
 <style scoped>

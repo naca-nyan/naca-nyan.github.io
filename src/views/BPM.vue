@@ -3,7 +3,7 @@
     <Header />
     <h1>BPM計るやつ</h1>
     <hr />
-    <main id="BPMApp">
+    <main>
       <p>
         <label>↓ボタンをタップ、もしくはテキストエリアでスペース</label>
         <button @click="tap()">Tap</button>
@@ -30,58 +30,45 @@
   </body>
 </template>
 
-<script>
-import { createApp } from "vue";
+<script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import Header from "@/components/Header.vue"
-
-const BPMConf = {
-  data() {
-    return {
-      taps: [],
-    };
-  },
-  methods: {
-    toBPM(ms) {
-      return 60000 / ms;
-    },
-    tap() {
-      this.taps.push(new Date());
-    },
-    reset() {
-      this.taps.length = 0;
-    },
-  },
-  computed: {
-    diffs() {
-      if (this.taps.length < 1) {
-        return [];
-      }
-      let diffs = [];
-      let y = this.taps[0];
-      for (let i = 1; i < this.taps.length; i++) {
-        const x = this.taps[i];
-        diffs.push(x - y);
-        y = x;
-      }
-      return diffs;
-    },
-    average() {
-      const sum = this.diffs.reduce((acc, x) => acc + x, 0);
-      const len = this.diffs.length;
-      return sum / len;
-    },
-  },
-};
-
-createApp(BPMConf).mount("#BPMApp");
+import Header from "@/components/Header.vue";
 
 @Options({
   components: {
     Header,
-  }
+  },
 })
-export default class BPM extends Vue {}
+export default class BPM extends Vue {
+  taps: number[] = [];
+  toBPM(ms: number): number {
+    return 60000 / ms;
+  }
+  tap(): void {
+    this.taps.push(new Date().getTime());
+  }
+  reset(): void {
+    this.taps.length = 0;
+  }
+  get diffs(): number[] {
+    if (this.taps.length < 1) {
+      return [];
+    }
+    const diffs: number[] = [];
+    let timeBefore: number = this.taps[0];
+    for (let i = 1; i < this.taps.length; i++) {
+      const timeAfter = this.taps[i];
+      diffs.push(timeAfter - timeBefore);
+      timeBefore = timeAfter;
+    }
+    return diffs;
+  }
+  get average(): number {
+    const sum = this.diffs.reduce((acc, x) => acc + x, 0);
+    const len = this.diffs.length;
+    return sum / len;
+  }
+}
 </script>
 
 <style scoped>

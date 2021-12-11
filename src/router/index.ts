@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Home from '../views/Home.vue'
+import Converter from '../views/Converter.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -7,6 +8,12 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Home',
     component: Home,
     meta: { title: 'Home' }
+  },
+  {
+    path: '/converter',
+    name: 'Converter',
+    component: Converter,
+    meta: { title: 'いろいろ変換'}
   },
   {
     path: '/about',

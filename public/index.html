@@ -8,10 +8,8 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
     <script>
       (function (l) {
-        var params = new URLSearchParams(l.search);
-        var path = params.get("p");
-        if (path) {
-          window.history.replaceState(null, null, l.origin + path);
+        if (l.hash) {
+          window.history.replaceState(null, null, l.hash.slice(1));
         }
       })(window.location);
     </script>

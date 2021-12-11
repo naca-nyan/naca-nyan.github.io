@@ -6,21 +6,8 @@
       </div>
       <div class="name">なかにゃん @naca_nyan</div>
       <div class="sns-list">
-        <a href="https://twitter.com/naca_nyan"
-          ><img class="sns-icon" src="../assets/twitter.svg" alt="twitter"
-        /></a>
-        <a href="https://github.com/naca-nyan"
-          ><img class="sns-icon" src="../assets/github.svg" alt="github"
-        /></a>
-        <a
-          href="https://vrchat.com/home/user/usr_08cf7780-e093-4e29-a083-2bc7e4957247"
-          ><img class="sns-icon" src="../assets/vrchat.png" alt="vrchat"
-        /></a>
-        <a href="https://www.youtube.com/channel/UCBBy1F0Jb_9DvRTV2kigHpw"
-          ><img class="sns-icon" src="../assets/youtube.svg" alt="youtube"
-        /></a>
-        <a href="https://skeb.jp/@naca_nyan"
-          ><img class="sns-icon" src="../assets/skeb.png" alt="skeb"
+        <a v-for="s in snsList" :key="s.name" :href="s.href">
+          <img class="sns-icon" :src="s.img" :alt="s.name"
         /></a>
       </div>
     </header>
@@ -37,7 +24,35 @@
 <script lang="ts">
 import { Vue } from "vue-class-component";
 
-export default class Home extends Vue {}
+export default class Home extends Vue {
+  snsList = [
+    {
+      name: "twitter",
+      href: "https://twitter.com/naca_nyan",
+      img: require("@/assets/twitter.svg"),
+    },
+    {
+      name: "github",
+      href: "https://github.com/naca-nyan",
+      img: require("@/assets/github.svg"),
+    },
+    {
+      name: "vrchat",
+      href: "https://vrchat.com/home/user/usr_08cf7780-e093-4e29-a083-2bc7e4957247",
+      img: require("@/assets/vrchat.png"),
+    },
+    {
+      name: "youtube",
+      href: "https://www.youtube.com/channel/UCBBy1F0Jb_9DvRTV2kigHpw",
+      img: require("@/assets/youtube.svg"),
+    },
+    {
+      name: "skeb",
+      href: "https://skeb.jp/@naca_nyan",
+      img: require("@/assets/skeb.png"),
+    },
+  ];
+}
 </script>
 
 <style scoped>

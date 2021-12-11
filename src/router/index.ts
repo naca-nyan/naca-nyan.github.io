@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Home from '../views/Home.vue'
 import Converter from '../views/Converter.vue'
+import BPM from '../views/BPM.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -14,6 +15,12 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Converter',
     component: Converter,
     meta: { title: 'いろいろ変換'}
+  },
+  {
+    path: '/bpm',
+    name: 'BPM',
+    component: BPM,
+    meta: { title: 'BPM計るやつ'}
   },
   {
     path: '/about',

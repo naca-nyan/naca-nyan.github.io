@@ -1,10 +1,6 @@
 <template>
   <body>
-    <header>
-      <div class="logo-container">
-        <a href="/"><img class="logo" src="../assets/icon.png" alt="icon" /></a>
-      </div>
-    </header>
+    <Header />
     <h1>いろいろ変換するやつ</h1>
     <hr />
     <main id="converter">
@@ -31,7 +27,8 @@
 
 <script>
 import { createApp } from "vue";
-import { Vue } from "vue-class-component";
+import { Options, Vue } from "vue-class-component";
+import Header from "@/components/Header.vue"
 
 const ConverterConfig = {
   data() {
@@ -80,6 +77,11 @@ const ConverterConfig = {
 };
 createApp(ConverterConfig).mount("#converter");
 
+@Options({
+  components: {
+    Header,
+  }
+})
 export default class Converter extends Vue {}
 </script>
 
@@ -87,31 +89,7 @@ export default class Converter extends Vue {}
 body {
   padding-top: 0;
 }
-header {
-  display: flex;
-  border-bottom: solid #fbfbfb 5px;
-}
-header .name {
-  font-weight: 600;
-  margin-bottom: 16px;
-}
-header a:hover {
-  border-bottom: none;
-}
-.logo-container {
-  width: 50px;
-  height: 50px;
-  position: relative;
-  overflow: hidden;
-  border-radius: 50%;
-  margin: 15px 10px 10px 20px;
-}
-img.logo {
-  display: inline;
-  margin: 0 auto;
-  height: 100%;
-  width: auto;
-}
+
 img.sns-icon {
   width: 35px;
   height: 35px;

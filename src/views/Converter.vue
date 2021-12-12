@@ -21,6 +21,16 @@
         <label>ms</label>
         <input type="text" v-model="ms" />ms
       </p>
+      <hr />
+      <h4>電子レンジ秒数くん</h4>
+      <p>
+        <label></label>
+        <input type="number" step="100" v-model="watt1" />W の
+        <input type="time" step="600" v-model="time1" />は
+        <label></label>
+        <input type="number" step="100" v-model="watt2" />W の
+        <input type="time" step="600" v-model="time2" />
+      </p>
     </main>
   </body>
 </template>
@@ -63,6 +73,20 @@ export default class Converter extends Vue {
   }
   set hz(val: number) {
     this.ms = 1000 / val;
+  }
+
+  watt1 = 500;
+  watt2 = 800;
+  time1 = "02:30";
+  get sec1(): number {
+    let [min, sec] = this.time1.split(":").map((s) => parseInt(s, 10));
+    return min * 60 + sec;
+  }
+  get time2(): string {
+    let sec2 = (this.sec1 * this.watt1) / this.watt2;
+    let min = ("00" + Math.floor(sec2 / 60)).slice(-2);
+    let sec = ("00" + Math.round(sec2 % 60)).slice(-2);
+    return `${min}:${sec}`;
   }
 }
 </script>

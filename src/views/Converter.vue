@@ -29,7 +29,7 @@
         <input type="time" step="600" v-model="time1" />は
         <label></label>
         <input type="number" step="100" v-model="watt2" />W の
-        <input type="time" step="600" v-model="time2" />
+        <input type="time" step="600" v-model="time2" readonly />
       </p>
     </main>
   </body>

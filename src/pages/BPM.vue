@@ -31,47 +31,51 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
+import { defineComponent, ref, computed } from "vue";
 import Header from "@/components/Header.vue";
 
-@Options({
-  components: {
-    Header,
-  },
-})
-export default class BPM extends Vue {
-  created(): void {
+export default defineComponent({
+  components: { Header },
+  setup: () => {
     document.title = "BPM計るやつ | naca-nyan.github.io";
-  }
-  taps: number[] = [];
-  toBPM(ms: number): number {
-    return 60000 / ms;
-  }
-  tap(): void {
-    this.taps.push(new Date().getTime());
-  }
-  reset(): void {
-    this.taps.length = 0;
-  }
-  get diffs(): number[] {
-    if (this.taps.length < 1) {
-      return [];
-    }
-    const diffs: number[] = [];
-    let timeBefore: number = this.taps[0];
-    for (let i = 1; i < this.taps.length; i++) {
-      const timeAfter = this.taps[i];
-      diffs.push(timeAfter - timeBefore);
-      timeBefore = timeAfter;
-    }
-    return diffs;
-  }
-  get average(): number {
-    const sum = this.diffs.reduce((acc, x) => acc + x, 0);
-    const len = this.diffs.length;
-    return sum / len;
-  }
-}
+    const taps = ref<number[]>([]);
+    const toBPM = (ms: number): number => {
+      return 60000 / ms;
+    };
+    const tap = (): void => {
+      taps.value.push(new Date().getTime());
+    };
+    const reset = (): void => {
+      taps.value.length = 0;
+    };
+    const diffs = computed(() => {
+      if (taps.value.length < 1) {
+        return [];
+      }
+      const diffs: number[] = [];
+      let timeBefore: number = taps.value[0];
+      for (let i = 1; i < taps.value.length; i++) {
+        const timeAfter = taps.value[i];
+        diffs.push(timeAfter - timeBefore);
+        timeBefore = timeAfter;
+      }
+      return diffs;
+    });
+    const average = computed(() => {
+      const sum = diffs.value.reduce((acc, x) => acc + x, 0);
+      const len = diffs.value.length;
+      return sum / len;
+    });
+    return {
+      taps,
+      diffs,
+      average,
+      toBPM,
+      tap,
+      reset,
+    };
+  },
+});
 </script>
 
 <style scoped>

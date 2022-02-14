@@ -15,8 +15,8 @@
     <hr />
     <p>作ったやつ</p>
     <ul>
-      <li><router-link to="/converter/">いろいろ変換するやつ</router-link></li>
-      <li><router-link to="/bpm/">ぽちぽちしてBPM計測するやつ</router-link></li>
+      <li><a href="/converter/">いろいろ変換するやつ</a></li>
+      <li><a href="/bpm/">ぽちぽちしてBPM計測するやつ</a></li>
     </ul>
   </div>
 </template>
@@ -25,6 +25,9 @@
 import { Vue } from "vue-class-component";
 
 export default class Home extends Vue {
+  created(): void {
+    document.title = "Home | naca-nyan.github.io";
+  }
   snsList = [
     {
       name: "twitter",
@@ -56,6 +59,7 @@ export default class Home extends Vue {
 </script>
 
 <style scoped>
+@import "../css/sakura-earthly.css";
 header {
   display: flex;
   align-items: center;

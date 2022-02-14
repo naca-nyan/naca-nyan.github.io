@@ -45,6 +45,9 @@ import Header from "@/components/Header.vue";
   },
 })
 export default class Converter extends Vue {
+  created(): void {
+    document.title = "いろいろ変換するやつ | naca-nyan.github.io";
+  }
   private internal_semitone = 0;
   private internal_percent = 100;
   ms = 500;
@@ -92,6 +95,8 @@ export default class Converter extends Vue {
 </script>
 
 <style scoped>
+@import "../css/sakura-earthly.css";
+
 body {
   padding-top: 0;
 }

@@ -40,6 +40,9 @@ import Header from "@/components/Header.vue";
   },
 })
 export default class BPM extends Vue {
+  created(): void {
+    document.title = "BPM計るやつ | naca-nyan.github.io";
+  }
   taps: number[] = [];
   toBPM(ms: number): number {
     return 60000 / ms;
@@ -72,6 +75,8 @@ export default class BPM extends Vue {
 </script>
 
 <style scoped>
+@import "../css/sakura-earthly.css";
+
 body {
   padding-top: 0;
 }

@@ -36,62 +36,80 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
-import Header from "@/components/Header.vue";
+import { computed, defineComponent, ref } from "vue";
+import Header from "../components/Header.vue";
 
-@Options({
-  components: {
-    Header,
-  },
-})
-export default class Converter extends Vue {
-  created(): void {
+export default defineComponent({
+  components: { Header },
+  setup() {
     document.title = "いろいろ変換するやつ | naca-nyan.github.io";
-  }
-  private internal_semitone = 0;
-  private internal_percent = 100;
-  ms = 500;
-  get semitone(): number {
-    return this.internal_semitone;
-  }
-  set semitone(val: number) {
-    this.internal_semitone = val;
-    this.internal_percent = Math.pow(2, val / 12) * 100;
-  }
-  get percent(): number {
-    return this.internal_percent;
-  }
-  set percent(val: number) {
-    this.internal_percent = val;
-    this.internal_semitone = Math.log2(val / 100) * 12;
-  }
-  get bpm(): number {
-    return this.hz * 60;
-  }
-  set bpm(val: number) {
-    this.hz = val / 60;
-  }
-  get hz(): number {
-    return 1000 / this.ms;
-  }
-  set hz(val: number) {
-    this.ms = 1000 / val;
-  }
+    const internal_percent = ref(100);
+    const internal_semitone = ref(0);
+    const percent = computed({
+      get: () => {
+        return internal_percent.value;
+      },
+      set: (val: number) => {
+        internal_percent.value = val;
+        internal_semitone.value = Math.log2(val / 100) * 12;
+      },
+    });
+    const semitone = computed({
+      get: () => {
+        return internal_semitone.value;
+      },
+      set: (val: number) => {
+        internal_semitone.value = val;
+        internal_percent.value = Math.pow(2, val / 12) * 100;
+      },
+    });
 
-  watt1 = 500;
-  watt2 = 800;
-  time1 = "02:30";
-  get sec1(): number {
-    let [min, sec] = this.time1.split(":").map((s) => parseInt(s, 10));
-    return min * 60 + sec;
-  }
-  get time2(): string {
-    let sec2 = (this.sec1 * this.watt1) / this.watt2;
-    let min = ("00" + Math.floor(sec2 / 60)).slice(-2);
-    let sec = ("00" + Math.round(sec2 % 60)).slice(-2);
-    return `${min}:${sec}`;
-  }
-}
+    const ms = ref(500);
+    const hz = computed({
+      get: () => {
+        return 1000 / ms.value;
+      },
+      set: (val: number) => {
+        ms.value = 1000 / val;
+      },
+    });
+    const bpm = computed({
+      get: () => {
+        return hz.value * 60;
+      },
+      set: (val: number) => {
+        hz.value = val / 60;
+      },
+    });
+
+    const watt1 = ref(500);
+    const watt2 = ref(800);
+    const time1 = ref("02:30");
+    const sec1 = computed(() => {
+      let [min, sec] = time1.value.split(":").map((s) => parseInt(s, 10));
+      return min * 60 + sec;
+    });
+    const time2 = computed(() => {
+      let sec2 = (sec1.value * watt1.value) / watt2.value;
+      let min = ("00" + Math.floor(sec2 / 60)).slice(-2);
+      let sec = ("00" + Math.round(sec2 % 60)).slice(-2);
+      return `${min}:${sec}`;
+    });
+    return {
+      percent,
+      semitone,
+
+      hz,
+      bpm,
+      ms,
+
+      watt1,
+      time1,
+      watt2,
+      time2,
+    };
+  },
+});
 </script>
 
 <style scoped>

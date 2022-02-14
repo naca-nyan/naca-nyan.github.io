@@ -22,40 +22,49 @@
 </template>
 
 <script lang="ts">
-import { Vue } from "vue-class-component";
+import { defineComponent } from "vue";
 
-export default class Home extends Vue {
-  created(): void {
-    document.title = "Home | naca-nyan.github.io";
-  }
-  snsList = [
-    {
-      name: "twitter",
-      href: "https://twitter.com/naca_nyan",
-      img: require("@/assets/twitter.svg"),
-    },
-    {
-      name: "github",
-      href: "https://github.com/naca-nyan",
-      img: require("@/assets/github.svg"),
-    },
-    {
-      name: "vrchat",
-      href: "https://vrchat.com/home/user/usr_08cf7780-e093-4e29-a083-2bc7e4957247",
-      img: require("@/assets/vrchat.png"),
-    },
-    {
-      name: "youtube",
-      href: "https://www.youtube.com/channel/UCBBy1F0Jb_9DvRTV2kigHpw",
-      img: require("@/assets/youtube.svg"),
-    },
-    {
-      name: "skeb",
-      href: "https://skeb.jp/@naca_nyan",
-      img: require("@/assets/skeb.png"),
-    },
-  ];
+interface SNS {
+  name: string;
+  href: string;
+  img: ImageData;
 }
+
+export default defineComponent({
+  setup() {
+    document.title = "Home | naca-nyan.github.io";
+    const snsList: SNS[] = [
+      {
+        name: "twitter",
+        href: "https://twitter.com/naca_nyan",
+        img: require("@/assets/twitter.svg"),
+      },
+      {
+        name: "github",
+        href: "https://github.com/naca-nyan",
+        img: require("@/assets/github.svg"),
+      },
+      {
+        name: "vrchat",
+        href: "https://vrchat.com/home/user/usr_08cf7780-e093-4e29-a083-2bc7e4957247",
+        img: require("@/assets/vrchat.png"),
+      },
+      {
+        name: "youtube",
+        href: "https://www.youtube.com/channel/UCBBy1F0Jb_9DvRTV2kigHpw",
+        img: require("@/assets/youtube.svg"),
+      },
+      {
+        name: "skeb",
+        href: "https://skeb.jp/@naca_nyan",
+        img: require("@/assets/skeb.png"),
+      },
+    ];
+    return {
+      snsList,
+    };
+  },
+});
 </script>
 
 <style scoped>

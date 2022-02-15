@@ -1,6 +1,6 @@
 <template>
   <body>
-    <Header />
+    <LogoHeader />
     <h1>いろいろ変換するやつ</h1>
     <hr />
     <main>
@@ -37,10 +37,10 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from "vue";
-import Header from "../components/Header.vue";
+import LogoHeader from "../components/LogoHeader.vue";
 
 export default defineComponent({
-  components: { Header },
+  components: { LogoHeader },
   setup() {
     document.title = "いろいろ変換するやつ | naca-nyan.github.io";
     const internal_percent = ref(100);

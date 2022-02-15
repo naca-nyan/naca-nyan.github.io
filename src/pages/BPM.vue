@@ -1,6 +1,6 @@
 <template>
   <body>
-    <Header />
+    <LogoHeader />
     <h1>BPM計るやつ</h1>
     <hr />
     <main>
@@ -32,10 +32,10 @@
 
 <script lang="ts">
 import { defineComponent, ref, computed } from "vue";
-import Header from "@/components/Header.vue";
+import LogoHeader from "@/components/LogoHeader.vue";
 
 export default defineComponent({
-  components: { Header },
+  components: { LogoHeader },
   setup: () => {
     document.title = "BPM計るやつ | naca-nyan.github.io";
     const taps = ref<number[]>([]);

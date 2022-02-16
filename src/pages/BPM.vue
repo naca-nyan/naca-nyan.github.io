@@ -1,5 +1,5 @@
 <template>
-  <body>
+  <div>
     <LogoHeader />
     <h1>BPM計るやつ</h1>
     <hr />
@@ -27,7 +27,7 @@
         </li>
       </ol>
     </main>
-  </body>
+  </div>
 </template>
 
 <script lang="ts">
@@ -81,9 +81,6 @@ export default defineComponent({
 <style scoped>
 @import "../css/sakura-earthly.css";
 
-body {
-  padding-top: 0;
-}
 html {
   touch-action: manipulation;
 }

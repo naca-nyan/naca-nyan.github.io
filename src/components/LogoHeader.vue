@@ -8,11 +8,11 @@
   </header>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({});
-</script>
+<style>
+body {
+  padding-top: 0 !important;
+}
+</style>
 
 <style scoped>
 header {

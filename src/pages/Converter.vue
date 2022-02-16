@@ -1,5 +1,5 @@
 <template>
-  <body>
+  <div>
     <LogoHeader />
     <h1>いろいろ変換するやつ</h1>
     <hr />
@@ -13,7 +13,7 @@
       <h4>電子レンジ秒数くん</h4>
       <ConverterMicrowave />
     </main>
-  </body>
+  </div>
 </template>
 
 <script lang="ts">
@@ -33,14 +33,4 @@ export default defineComponent({
 
 <style scoped>
 @import "../css/sakura-earthly.css";
-
-body {
-  padding-top: 0;
-}
-
-img.sns-icon {
-  width: 35px;
-  height: 35px;
-  margin: 0 3px;
-}
 </style>

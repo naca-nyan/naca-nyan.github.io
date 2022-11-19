@@ -1,9 +1,9 @@
 <template>
   <header>
     <div class="logo-container">
-      <a href="/">
+      <NuxtLink to="/">
         <img class="logo" src="../assets/icon.png" alt="icon" />
-      </a>
+      </NuxtLink>
     </div>
   </header>
 </template>

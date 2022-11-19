@@ -15,8 +15,8 @@
   <hr />
   <p>作ったやつ</p>
   <ul>
-    <li><a href="converter/">いろいろ変換するやつ</a></li>
-    <li><a href="bpm/">ぽちぽちしてBPM計測するやつ</a></li>
+    <li><NuxtLink to="converter/">いろいろ変換するやつ</NuxtLink></li>
+    <li><NuxtLink to="bpm/">ぽちぽちしてBPM計測するやつ</NuxtLink></li>
   </ul>
 </template>
 

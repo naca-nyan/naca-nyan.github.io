@@ -8,7 +8,7 @@
       <p>
         <label>↓ボタンをタップ、もしくはテキストエリアでスペース</label>
         <button @click="tap()">Tap</button>
-        <input type="text" @input.prevent="tap()" ref="tapinput" />
+        <input @input="tap()" :value="emptyString" />
         <button @click="reset()">Reset</button>
       </p>
       <div v-if="taps.length === 1">First Tap</div>
@@ -25,6 +25,7 @@
 </template>
 
 <script setup lang="ts">
+const emptyString = ref("");
 const taps = ref<number[]>([]);
 const toBPM = (ms: number): number => {
   return 60000 / ms;

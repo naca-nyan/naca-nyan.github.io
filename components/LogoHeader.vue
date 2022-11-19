@@ -8,12 +8,6 @@
   </header>
 </template>
 
-<style>
-body {
-  padding-top: 0 !important;
-}
-</style>
-
 <style scoped>
 header {
   display: flex;

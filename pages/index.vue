@@ -79,7 +79,7 @@ header a:hover {
 .image-cropper {
   width: 250px;
   height: 250px;
-  margin-bottom: 20px;
+  margin: 20px;
   position: relative;
   overflow: hidden;
   border-radius: 50%;

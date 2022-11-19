@@ -6,5 +6,5 @@ export default defineNuxtConfig({
       titleTemplate: "%s - naca-nyan.github.io",
     },
   },
-  css: ["sakura.css/css/sakura-earthly.css"],
+  css: ["sakura.css/css/sakura-earthly.css", "@/css/style.css"],
 });

@@ -1,5 +1,5 @@
 <template>
-  <Title>BPM計るやつ</Title>
+  <HeadContent title="BPM計るやつ" description="ぽちぽちしてBPM計るやつ" />
   <div>
     <LogoHeader />
     <h1>BPM計るやつ</h1>

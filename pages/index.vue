@@ -1,5 +1,5 @@
 <template>
-  <Title>Home</Title>
+  <HeadContent title="Home" description="なかにゃんのサイトだよ" />
   <header>
     <div class="image-cropper">
       <img class="profile-pic" src="~/assets/icon.png" alt="icon" />

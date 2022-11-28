@@ -1,5 +1,8 @@
 <template>
-  <Title>いろいろ変換するやつ</Title>
+  <HeadContent
+    title="いろいろ変換するやつ"
+    description="べんりな数値変換ツールたち"
+  />
   <div>
     <LogoHeader />
     <h1>いろいろ変換するやつ</h1>

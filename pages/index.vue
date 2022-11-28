@@ -52,7 +52,7 @@ const snsList: SNS[] = [
   },
   {
     name: "youtube",
-    href: "https://www.youtube.com/channel/UCBBy1F0Jb_9DvRTV2kigHpw",
+    href: "https://www.youtube.com/@naca_nyan",
     img: imgYoutube,
   },
   {

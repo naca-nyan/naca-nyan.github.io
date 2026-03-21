@@ -1,8 +1,18 @@
 use dioxus::prelude::*;
 
+#[derive(Debug, Clone, Routable, PartialEq)]
+#[rustfmt::skip]
+enum Route {
+    #[route("/")]
+    Home {},
+    #[layout(Navbar)]
+    #[route("/bpm")]
+    BPM {},
+}
+
 const FAVICON: Asset = asset!("/assets/favicon.ico");
-const MAIN_CSS: Asset = asset!("/assets/style.css");
 const SAKURA_CSS: &str = "https://cdn.jsdelivr.net/npm/sakura.css@1.5.1/css/sakura-earthly.css";
+const MAIN_CSS: Asset = asset!("/assets/style.css");
 
 fn main() {
     dioxus::launch(App);
@@ -12,10 +22,10 @@ fn main() {
 fn App() -> Element {
     rsx! {
         document::Link { rel: "icon", href: FAVICON }
-        document::Link { rel: "stylesheet", href: MAIN_CSS }
         document::Link { rel: "stylesheet", href: SAKURA_CSS }
+        document::Link { rel: "stylesheet", href: MAIN_CSS }
 
-        Main {}
+        Router::<Route> {}
     }
 }
 
@@ -26,7 +36,7 @@ struct SNS<'a> {
 }
 
 #[component]
-fn Main() -> Element {
+fn Home() -> Element {
     let sns_list = [
         SNS {
             name: "twitter",
@@ -55,6 +65,7 @@ fn Main() -> Element {
         },
     ];
     rsx! {
+        TitleAndMeta { title: "Home", description: "なかにゃんのサイトだよ" }
         header {
             div { class: "image-cropper",
                 img { class: "profile-pic", src: asset!("/assets/icon.png") }
@@ -68,5 +79,126 @@ fn Main() -> Element {
                 }
             }
         }
+        h1 { "便利なやつら" }
+        hr {}
+        p { "作ったやつ" }
+        ul {
+            li {
+                Link { to: Route::BPM {}, "ぽちぽちしてBPM計測するやつ" }
+            }
+        }
+
+    }
+}
+
+struct BPMCalculator {
+    ts: Vec<i64>,
+}
+
+impl BPMCalculator {
+    fn new() -> Self {
+        Self { ts: vec![] }
+    }
+    fn tap(&mut self) {
+        self.ts.push(chrono::Utc::now().timestamp_millis());
+    }
+    fn reset(&mut self) {
+        self.ts.clear();
+    }
+    fn diff(&self) -> impl Iterator<Item = i64> + '_ {
+        self.ts.windows(2).map(|v| v[1] - v[0])
+    }
+    fn average(&self) -> Option<Option<f64>> {
+        let len = self.ts.len();
+        if len == 0 {
+            None
+        } else if self.ts.len() < 2 {
+            Some(None)
+        } else {
+            let diff_sum: i64 = self.diff().sum();
+            let diff_len = len - 1;
+            Some(Some(diff_sum as f64 / diff_len as f64))
+        }
+    }
+}
+
+fn ms_to_bpm(ms: f64) -> f64 {
+    60.0 * 1000.0 / ms
+}
+
+#[component]
+fn BPM() -> Element {
+    let mut bpm = use_signal(BPMCalculator::new);
+    let mut str = use_signal(String::new);
+
+    rsx! {
+        TitleAndMeta {
+            title: "BPM計るやつ",
+            description: "ぽちぽちしてBPM計るやつ",
+        }
+        h1 { "BPM計るやつ" }
+        hr {}
+        main {
+            p {
+                label { "↓ボタンをタップ、もしくはテキストエリアでスペース" }
+                button { onclick: move |_| bpm.write().tap(), "Tap" }
+                input {
+                    value: "{str}",
+                    oninput: move |e| {
+                        bpm.write().tap();
+                        *str.write() = e.value();
+                    },
+                }
+                button {
+                    onclick: move |_| {
+                        bpm.write().reset();
+                        str.write().clear();
+                    },
+                    "Reset"
+                }
+            }
+            if let Some(avg) = bpm.read().average() {
+                if let Some(ms) = avg {
+                    div { "Average: {ms_to_bpm(ms)} ({ms}ms)" }
+                } else {
+                    div { "First Tap" }
+                }
+            }
+            ol {
+                for ms in bpm.read().diff() {
+                    li { "{ms_to_bpm(ms as f64)} ({ms}ms)" }
+                }
+            }
+        }
+    }
+}
+
+#[component]
+fn TitleAndMeta(title: String, description: String) -> Element {
+    let title = format!("{title} - naca-nyan.github.io");
+
+    rsx! {
+        document::Title { "{title}" }
+        document::Meta { name: "og:title", content: "{title}" }
+        document::Meta { name: "og:image", content: asset!("/assets/icon.png") }
+        document::Meta { name: "twitter:card", content: "summary" }
+        document::Meta { name: "twitter:description", content: "{description}" }
+        document::Meta { name: "twitter:site", content: "@naca-nyan" }
+        document::Meta { name: "twitter:creator", content: "@naca-nyan" }
+    }
+}
+
+#[component]
+fn Navbar() -> Element {
+    rsx! {
+        nav {
+            div { class: "logo-container",
+                Link { to: Route::Home {},
+                    img { class: "logo", src: asset!("/assets/icon.png") }
+                }
+            }
+        }
+
+        Outlet::<Route> {}
     }
 }

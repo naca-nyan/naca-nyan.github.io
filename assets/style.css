@@ -2,3 +2,34 @@ body {
   padding-top: 0;
   padding-bottom: 0;
 }
+header {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+header .name {
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+header a:hover {
+  border-bottom: none;
+}
+.image-cropper {
+  width: 250px;
+  height: 250px;
+  margin: 20px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+}
+img.profile-pic {
+  display: inline;
+  margin: 0 auto;
+  height: 100%;
+  width: auto;
+}
+img.sns-icon {
+  width: 35px;
+  height: 35px;
+  margin: 0 3px;
+}

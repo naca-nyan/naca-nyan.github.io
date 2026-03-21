@@ -5,22 +5,24 @@ on:
   push:
     branches:
       - main
+env:
+  PROJECT_NAME: naca-nyan-github-io
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - run: corepack enable
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
-          node-version: "20"
-      # Pick your own package manager and build script
-      - run: yarn install
-      - run: npx nuxt build --preset github_pages
+          target: wasm32-unknown-unknown
+      - name: Install dioxus-cli
+        run: curl -sSL https://dioxus.dev/install.sh | bash
+      - name: Build
+        run: dx bundle --release --ssg
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v4
         with:
-          path: ./.output/public
+          path: ./target/dx/${{ env.PROJECT_NAME }}/release/web/public
   # Deployment job
   deploy:
     # Add a dependency to the build job
@@ -31,11 +33,11 @@ jobs:
       id-token: write # to verify the deployment originates from an appropriate source
     # Deploy to the github_pages environment
     environment:
-      name: github_pages
+      name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     # Specify runner + deployment step
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,14 @@
+[package]
+name = "naca-nyan-github-io"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+chrono = "0.4.44"
+dioxus = { version = "0.7.1", features = [] }
+
+[features]
+default = ["web"]
+web = ["dioxus/web"]
+desktop = ["dioxus/desktop"]
+mobile = ["dioxus/mobile"]

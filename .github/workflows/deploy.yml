@@ -18,7 +18,7 @@ jobs:
       - name: Install dioxus-cli
         run: curl -sSL https://dioxus.dev/install.sh | bash
       - name: Build
-        run: dx bundle --release --ssg
+        run: dx build --release --ssg
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:

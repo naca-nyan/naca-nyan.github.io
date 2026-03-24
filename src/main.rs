@@ -285,7 +285,7 @@ impl BPMCalculator {
         self.ts.clear();
     }
     fn diff(&self) -> impl Iterator<Item = i64> + '_ {
-        self.ts.windows(2).map(|v| v[1] - v[0])
+        self.ts.windows(2).map(|v| v[1] - v[0]).rev()
     }
     fn average(&self) -> Option<Option<f64>> {
         let len = self.ts.len();
@@ -308,7 +308,6 @@ fn ms_to_bpm(ms: f64) -> f64 {
 #[component]
 fn BPM() -> Element {
     let mut bpm = use_signal(BPMCalculator::new);
-    let mut str = use_signal(String::new);
 
     rsx! {
         TitleAndMeta {
@@ -319,32 +318,25 @@ fn BPM() -> Element {
         hr {}
         main {
             p {
-                label { "↓ボタンをタップ、もしくはテキストエリアでスペース" }
-                button { onclick: move |_| bpm.write().tap(), "Tap" }
-                input {
-                    value: "{str}",
-                    oninput: move |e| {
-                        bpm.write().tap();
-                        *str.write() = e.value();
-                    },
-                }
                 button {
-                    onclick: move |_| {
-                        bpm.write().reset();
-                        str.write().clear();
-                    },
-                    "Reset"
+                    onmounted: async move |e| e.set_focus(true).await.unwrap_or_default(),
+                    onclick: move |_| bpm.write().tap(),
+                    "Tap"
                 }
+                button { onclick: move |_| bpm.write().reset(), "Reset" }
             }
             if let Some(avg) = bpm.read().average() {
                 if let Some(ms) = avg {
-                    div { "Average: {ms_to_bpm(ms)} ({ms}ms)" }
+                    p {
+                        span { style: "font-weight: bold", "{ms_to_bpm(ms)}" }
+                        " ({ms}ms)"
+                    }
                 } else {
-                    div { "First Tap" }
+                    p { "First Tap" }
                 }
             }
             ol {
-                for ms in bpm.read().diff() {
+                for ms in bpm.read().diff().take(18) {
                     li { "{ms_to_bpm(ms as f64)} ({ms}ms)" }
                 }
             }

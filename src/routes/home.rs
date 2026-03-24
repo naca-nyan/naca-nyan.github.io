@@ -29,7 +29,7 @@ pub fn Home() -> Element {
         SNS {
             name: "vrchat",
             href: "https://vrchat.com/home/user/usr_08cf7780-e093-4e29-a083-2bc7e4957247",
-            img: asset!("/assets/vrchat.png"),
+            img: asset!("/assets/vrchat.svg"),
         },
         SNS {
             name: "youtube",

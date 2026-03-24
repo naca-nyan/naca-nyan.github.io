@@ -12,9 +12,9 @@ struct SNS<'a> {
 pub fn Home() -> Element {
     let sns_list = [
         SNS {
-            name: "twitter",
-            href: "https://twitter.com/naca_nyan",
-            img: asset!("/assets/twitter.svg"),
+            name: "x",
+            href: "https://x.com/naca_nyan",
+            img: asset!("/assets/x.svg"),
         },
         SNS {
             name: "github",

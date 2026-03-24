@@ -12,14 +12,19 @@ struct SNS<'a> {
 pub fn Home() -> Element {
     let sns_list = [
         SNS {
-            name: "x",
-            href: "https://x.com/naca_nyan",
-            img: asset!("/assets/x.svg"),
-        },
-        SNS {
             name: "github",
             href: "https://github.com/naca-nyan",
             img: asset!("/assets/github.svg"),
+        },
+        SNS {
+            name: "bluesky",
+            href: "https://bsky.app/profile/naca-nyan.bsky.social",
+            img: asset!("/assets/bluesky.svg"),
+        },
+        SNS {
+            name: "x",
+            href: "https://x.com/naca_nyan",
+            img: asset!("/assets/x.svg"),
         },
         SNS {
             name: "vrchat",
@@ -30,11 +35,6 @@ pub fn Home() -> Element {
             name: "youtube",
             href: "https://www.youtube.com/@naca_nyan",
             img: asset!("/assets/youtube.svg"),
-        },
-        SNS {
-            name: "skeb",
-            href: "https://skeb.jp/@naca_nyan",
-            img: asset!("/assets/skeb.png"),
         },
     ];
     rsx! {

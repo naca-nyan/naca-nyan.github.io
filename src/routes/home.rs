@@ -47,7 +47,7 @@ pub fn Home() -> Element {
             div { class: "sns-list",
                 for s in sns_list {
                     a { key: "{s.name}", href: s.href,
-                        img { class: "sns-icon", src: s.img }
+                        img { src: s.img }
                     }
                 }
             }

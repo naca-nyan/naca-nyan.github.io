@@ -13,6 +13,8 @@ enum Route {
     Converter {},
     #[route("/bpm")]
     BPM {},
+    #[route("/time-goal")]
+    TimeGoal {},
 }
 
 const FAVICON: Asset = asset!("/assets/favicon.ico");

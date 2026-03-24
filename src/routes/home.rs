@@ -62,6 +62,9 @@ pub fn Home() -> Element {
             li {
                 Link { to: Route::BPM {}, "ぽちぽちしてBPM計測するやつ" }
             }
+            li {
+                Link { to: Route::TimeGoal {}, "時間計算するやつ" }
+            }
         }
 
     }

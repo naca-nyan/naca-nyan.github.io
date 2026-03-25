@@ -14,29 +14,12 @@ impl HourMin {
     }
 }
 
-impl From<&str> for HourMin {
-    fn from(value: &str) -> Self {
-        let v = if value.contains(":") {
-            value
-                .split(":")
-                .map(|s| s.parse().unwrap_or_default())
-                .fold(0, |acc, x: i32| acc * 60 + x)
-        } else {
-            let value = value.parse::<i32>().unwrap_or_default();
-            let value = format!("{value:04}");
-            value
-                .as_bytes()
-                .chunks(2)
-                .map(|i| {
-                    str::from_utf8(i)
-                        .unwrap_or_default()
-                        .parse()
-                        .unwrap_or_default()
-                })
-                .into_iter()
-                .fold(0, |acc, x: i32| acc * 60 + x)
-        };
-        HourMin(v)
+impl TryFrom<&str> for HourMin {
+    type Error = std::num::ParseIntError;
+    fn try_from(value: &str) -> Result<HourMin, Self::Error> {
+        let n: i32 = value.replace(':', "").parse()?;
+        let v = (n / 100) * 60 + (n % 100);
+        Ok(HourMin(v))
     }
 }
 
@@ -70,7 +53,11 @@ impl std::fmt::Display for HourMin {
 pub fn TimeGoal() -> Element {
     let mut s = use_signal(String::new);
     let mut goal = use_signal(|| String::from("8:00"));
-    let times = s.read().split("\n").map(HourMin::from).collect::<Vec<_>>();
+    let times: Vec<HourMin> = s
+        .read()
+        .split("\n")
+        .filter_map(|s| HourMin::try_from(s).ok())
+        .collect();
     let mut iter = times.chunks_exact(2);
     let mut elapsed = HourMin(0);
     while let Some(v) = iter.next() {
@@ -81,7 +68,10 @@ pub fn TimeGoal() -> Element {
         elapsed += HourMin::now() - v[0]
     }
     let now = use_signal(HourMin::now);
-    let remaining = HourMin::from(goal.read().as_str()).0 - elapsed.0;
+    let remaining = HourMin::try_from(goal.read().as_str())
+        .map(|v| v.0)
+        .unwrap_or_default()
+        - elapsed.0;
     rsx! {
         TitleAndMeta {
             title: "時間計算するやつ",

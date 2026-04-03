@@ -1,8 +1,10 @@
 mod bpm;
 mod converter;
 mod home;
+mod password;
 mod time_goal;
 pub use bpm::BPM;
 pub use converter::Converter;
 pub use home::Home;
+pub use password::Password;
 pub use time_goal::TimeGoal;

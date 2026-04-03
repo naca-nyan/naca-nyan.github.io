@@ -15,6 +15,8 @@ enum Route {
     BPM {},
     #[route("/time-goal")]
     TimeGoal {},
+    #[route("/password")]
+    Password {},
 }
 
 const FAVICON: Asset = asset!("/assets/favicon.ico");

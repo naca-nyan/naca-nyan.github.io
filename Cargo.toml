@@ -6,6 +6,8 @@ edition = "2024"
 [dependencies]
 chrono = "0.4.44"
 dioxus = { version = "0.7.1", features = ["fullstack", "router"] }
+getrandom = { version = "0.4", features = ["wasm_js"] }
+rand = "0.10.0"
 
 [features]
 default = ["web"]

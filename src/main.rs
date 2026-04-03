@@ -32,6 +32,7 @@ async fn static_routes() -> Result<Vec<String>, ServerFnError> {
         .collect())
 }
 
+#[cfg(not(debug_assertions))]
 fn main() {
     dioxus::LaunchBuilder::new()
         // Set the server config only if we are building the server target
@@ -55,6 +56,11 @@ fn main() {
                 .enable_out_of_order_streaming()
         })
         .launch(App);
+}
+
+#[cfg(debug_assertions)]
+fn main() {
+    dioxus::launch(App);
 }
 
 #[component]

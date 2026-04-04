@@ -67,11 +67,11 @@ pub fn Converter() -> Element {
             description: "べんりな数値変換ツールたち",
         }
 
-        h1 { "いろいろ変換するやつ" }
-        hr {}
-        main {
-            h4 { "ボイチェンの％と半音単位こんばーた" }
-            p {
+        main { class: "typography ui",
+            h1 { class: "text-3xl font-semibold", "いろいろ変換するやつ" }
+            hr { class: "my-3" }
+            h4 { class: "text-xl", "ボイチェンの％と半音単位こんばーた" }
+            div { class: "my-3 grid grid-cols-3 max-w-[600px] gap-1",
                 label { "パーセント" }
                 input {
                     r#type: "number",
@@ -87,32 +87,35 @@ pub fn Converter() -> Element {
                 }
                 "st"
             }
-            hr {}
+            hr { class: "my-3" }
             h4 { "HzとBPMとms行ったり来たり" }
-            p {
+            div { class: "my-3 grid grid-cols-3 max-w-[600px] gap-1",
                 label { "Hz" }
                 input {
                     r#type: "number",
                     value: hz,
                     oninput: move |e| set_hz(e.parsed().unwrap_or_default()),
                 }
+                label {}
                 label { "BPM" }
                 input {
                     r#type: "number",
                     value: bpm,
                     oninput: move |e| set_bpm(e.parsed().unwrap_or_default()),
                 }
+                label {}
                 label { "ms" }
                 input {
                     r#type: "number",
                     value: ms,
                     oninput: move |e| set_ms(e.parsed().unwrap_or_default()),
                 }
-            }
-            hr {}
-            h4 { "電子レンジ秒数くん" }
-            p {
                 label {}
+            }
+            hr { class: "my-3" }
+            h4 { "電子レンジ秒数くん" }
+
+            div { class: "my-3 grid grid-cols-4 max-w-[600px] gap-1",
                 input {
                     r#type: "number",
                     step: 100,
@@ -127,7 +130,6 @@ pub fn Converter() -> Element {
                     oninput: move |e| *time1.write() = MinSec::from(e.value()),
                 }
                 "は"
-                label {}
                 input {
                     r#type: "number",
                     step: 100,

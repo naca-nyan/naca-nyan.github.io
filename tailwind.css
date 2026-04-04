@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@layer components {
+  .typography {
+    color: var(--color-gray-600);
+    a {
+      color: var(--color-blue-400);
+      &:hover {
+        color: var(--color-blue-500);
+      }
+    }
+  }
+
+  .ui {
+    input { @apply rounded-sm bg-zinc-100 }
+    textarea { @apply rounded-sm bg-zinc-100 }
+  }
+}

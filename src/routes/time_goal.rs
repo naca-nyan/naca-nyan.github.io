@@ -39,35 +39,40 @@ pub fn TimeGoal() -> Element {
             title: "時間計算するやつ",
             description: "時間計算するよ",
         }
-        h1 { "目標まであと何分？" }
-        "目標"
-        input {
-            r#type: "text",
-            value: "{goal_s}",
-            oninput: move |e| *goal_s.write() = e.value(),
-        }
-        textarea {
-            value: "{s}",
-            rows: 4,
-            oninput: move |e| {
-                *s.write() = e.value();
-                *now_signal.write() = (!e.value().is_empty()).then(now);
-            },
-        }
-        if let Some(n) = now_signal() {
-            div {
-                "いま: {fmt(n)}"
-                br {}
-                "経過時間: {fmt(elapsed)}"
-                br {}
-                if goal > elapsed {
-                    "達成予定時刻: {fmt(n + goal - elapsed)}"
-                } else {
-                    "目標達成！"
+        main { class: "typography ui",
+            h1 { class: "text-3xl font-semibold", "目標まであと何分？" }
+            div { class: "my-2",
+                "目標"
+                input {
+                    r#type: "text",
+                    value: "{goal_s}",
+                    oninput: move |e| *goal_s.write() = e.value(),
                 }
             }
-        } else {
-            "なにか入力してね"
+            textarea {
+                class: "block",
+                value: "{s}",
+                rows: 4,
+                oninput: move |e| {
+                    *s.write() = e.value();
+                    *now_signal.write() = (!e.value().is_empty()).then(now);
+                },
+            }
+            if let Some(n) = now_signal() {
+                div {
+                    "いま: {fmt(n)}"
+                    br {}
+                    "経過時間: {fmt(elapsed)}"
+                    br {}
+                    if goal > elapsed {
+                        "達成予定時刻: {fmt(n + goal - elapsed)}"
+                    } else {
+                        "目標達成！"
+                    }
+                }
+            } else {
+                "なにか入力してね"
+            }
         }
     }
 }

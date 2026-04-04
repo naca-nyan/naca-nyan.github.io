@@ -46,16 +46,22 @@ pub fn BPM() -> Element {
             title: "BPM計るやつ",
             description: "ぽちぽちしてBPM計るやつ",
         }
-        h1 { "BPM計るやつ" }
-        hr {}
-        main {
-            p {
+
+        main { class: "typography ui",
+            h1 { class: "text-3xl font-semibold", "BPM計るやつ" }
+            hr { class: "my-3" }
+            div { class: "my-3",
                 button {
+                    class: "text-white bg-green-700 rounded-md px-3 py-1 border",
                     onmounted: async move |e| e.set_focus(true).await.unwrap_or_default(),
                     onclick: move |_| bpm.write().tap(),
                     "Tap"
                 }
-                button { onclick: move |_| bpm.write().reset(), "Reset" }
+                button {
+                    class: "text-white bg-green-700 rounded-md px-3 py-1 border",
+                    onclick: move |_| bpm.write().reset(),
+                    "Reset"
+                }
             }
             if let Some(avg) = bpm.read().average() {
                 if let Some(ms) = avg {

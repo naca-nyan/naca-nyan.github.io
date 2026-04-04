@@ -39,36 +39,39 @@ pub fn Home() -> Element {
     ];
     rsx! {
         TitleAndMeta { title: "Home", description: "なかにゃんのサイトだよ" }
-        header {
-            div { class: "image-cropper",
-                img { class: "profile-pic", src: asset!("/assets/icon.png") }
-            }
-            div { class: "name", "なかにゃん @naca_nyan" }
-            div { class: "sns-list",
-                for s in sns_list {
-                    a { key: "{s.name}", href: s.href,
-                        img { src: s.img }
+        div { class: "mx-auto container px-3 typography",
+            header { class: "my-10 flex flex-col items-center gap-5",
+                div { class: "max-w-[500px] w-full",
+                    img {
+                        class: "rounded-full overflow-hidden",
+                        src: asset!("/assets/icon.png"),
+                    }
+                }
+                p { class: "font-extrabold text-3xl text-center", "なかにゃん @naca_nyan" }
+                div { class: "flex gap-3",
+                    for s in sns_list {
+                        a { key: "{s.name}", href: s.href,
+                            img { class: "rounded-sm w-16", src: s.img }
+                        }
                     }
                 }
             }
+            h1 { class: "font-bold text-3xl", "便利なやつら" }
+            hr { class: "my-3" }
+            ul { class: "ms-6 list-disc text-xl",
+                li {
+                    Link { to: Route::Converter {}, "いろいろ変換するやつ" }
+                }
+                li {
+                    Link { to: Route::BPM {}, "ぽちぽちしてBPM計測するやつ" }
+                }
+                li {
+                    Link { to: Route::TimeGoal {}, "時間計算するやつ" }
+                }
+                li {
+                    Link { to: Route::Password {}, "パスワード生成するやつ" }
+                }
+            }
         }
-        h1 { "便利なやつら" }
-        hr {}
-        p { "作ったやつ" }
-        ul {
-            li {
-                Link { to: Route::Converter {}, "いろいろ変換するやつ" }
-            }
-            li {
-                Link { to: Route::BPM {}, "ぽちぽちしてBPM計測するやつ" }
-            }
-            li {
-                Link { to: Route::TimeGoal {}, "時間計算するやつ" }
-            }
-            li {
-                Link { to: Route::Password {}, "パスワード生成するやつ" }
-            }
-        }
-
     }
 }

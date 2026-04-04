@@ -20,8 +20,7 @@ enum Route {
 }
 
 const FAVICON: Asset = asset!("/assets/favicon.ico");
-const SAKURA_CSS: &str = "https://cdn.jsdelivr.net/npm/sakura.css@1.5.1/css/sakura-earthly.css";
-const MAIN_CSS: Asset = asset!("/assets/style.css");
+const TAILWIND_CSS: Asset = asset!("/assets/tailwind.css");
 
 #[server(endpoint = "static_routes", output = server_fn::codec::Json)]
 async fn static_routes() -> Result<Vec<String>, ServerFnError> {
@@ -67,8 +66,7 @@ fn main() {
 fn App() -> Element {
     rsx! {
         document::Link { rel: "icon", href: FAVICON }
-        document::Link { rel: "stylesheet", href: SAKURA_CSS }
-        document::Link { rel: "stylesheet", href: MAIN_CSS }
+        document::Link { rel: "stylesheet", href: TAILWIND_CSS }
 
         Router::<Route> {}
     }
@@ -92,14 +90,17 @@ fn TitleAndMeta(title: String, description: String) -> Element {
 #[component]
 fn Navbar() -> Element {
     rsx! {
-        nav {
-            div { class: "logo-container",
+        nav { class: "m-auto px-3 py-1.5 container border-b-2 border-zinc-100",
+            div {
                 Link { to: Route::Home {},
-                    img { class: "logo", src: asset!("/assets/icon.png") }
+                    img {
+                        class: "w-14 rounded-full overflow-hidden",
+                        src: asset!("/assets/icon.png"),
+                    }
                 }
             }
         }
 
-        Outlet::<Route> {}
+        div { class: "m-auto container", Outlet::<Route> {} }
     }
 }

@@ -48,11 +48,11 @@ pub fn BPM() -> Element {
         }
 
         main { class: "typography ui",
-            h1 { class: "text-3xl font-semibold", "BPM計るやつ" }
+            h1 { class: "text-xl font-semibold", "BPM計るやつ" }
             hr { class: "my-3" }
-            div { class: "my-3",
+            div { class: "my-3 grid grid-cols-2",
                 button {
-                    class: "text-white bg-green-700 rounded-md px-3 py-1 border",
+                    class: "text-white bg-green-700 rounded-md p-2 border",
                     onmounted: async move |e| e.set_focus(true).await.unwrap_or_default(),
                     onclick: move |_| bpm.write().tap(),
                     "Tap"

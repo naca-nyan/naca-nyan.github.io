@@ -40,7 +40,8 @@ pub fn TimeGoal() -> Element {
             description: "時間計算するよ",
         }
         main { class: "typography ui",
-            h1 { class: "text-3xl font-semibold", "目標まであと何分？" }
+            h1 { class: "text-xl font-semibold", "目標まであと何分？" }
+            hr { class: "my-3" }
             div { class: "my-2",
                 "目標"
                 input {

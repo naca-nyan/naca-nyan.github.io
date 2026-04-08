@@ -68,9 +68,9 @@ pub fn Converter() -> Element {
         }
 
         main { class: "typography ui",
-            h1 { class: "text-3xl font-semibold", "いろいろ変換するやつ" }
+            h1 { class: "text-xl font-semibold", "いろいろ変換するやつ" }
             hr { class: "my-3" }
-            h4 { class: "text-xl", "ボイチェンの％と半音単位こんばーた" }
+            h4 { "ボイチェンの％と半音単位こんばーた" }
             div { class: "my-3 grid grid-cols-3 max-w-[600px] gap-1",
                 label { "パーセント" }
                 input {

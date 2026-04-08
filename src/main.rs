@@ -6,9 +6,9 @@ use crate::routes::*;
 #[derive(Debug, Clone, Routable, PartialEq)]
 #[rustfmt::skip]
 enum Route {
+    #[layout(Navbar)]
     #[route("/")]
     Home {},
-    #[layout(Navbar)]
     #[route("/converter")]
     Converter {},
     #[route("/bpm")]
@@ -90,17 +90,22 @@ fn TitleAndMeta(title: String, description: String) -> Element {
 #[component]
 fn Navbar() -> Element {
     rsx! {
-        nav { class: "m-auto px-3 py-1.5 container border-b-2 border-zinc-100",
-            div {
-                Link { to: Route::Home {},
+        nav { class: "mx-auto p-3 container",
+            div { class: "flex",
+                Link { class: "flex items-center gap-3", to: Route::Home {},
                     img {
                         class: "w-14 rounded-full overflow-hidden",
                         src: asset!("/assets/icon.png"),
                     }
+                    div { class: "text-xl font-serif",
+                        span { class: "text-gray-500", "naca-nyan" }
+                        span { class: "text-gray-300", ".github.io" }
+                    }
                 }
             }
         }
+        hr { class: "border-b border-zinc-100 lg:border-none" }
 
-        div { class: "m-auto container", Outlet::<Route> {} }
+        div { class: "py-8 px-3 m-auto container", Outlet::<Route> {} }
     }
 }

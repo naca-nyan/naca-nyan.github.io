@@ -36,7 +36,8 @@ pub fn Password() -> Element {
             description: "ランダムなパスワードをクライアント側で作るよ",
         }
         main { class: "typography ui flex flex-col gap-3",
-            h1 { "パスワード作るやつ" }
+            h1 { class: "text-xl font-semibold", "パスワード作るやつ" }
+            hr {}
             div {
                 "文字種類"
                 input {
@@ -57,7 +58,7 @@ pub fn Password() -> Element {
                 }
             }
             button {
-                class: "text-white bg-green-700 rounded px-3 py-1 w-auto",
+                class: "text-white bg-green-700 rounded p-3 w-auto",
                 onclick: move |_| {
                     *passwords.write() = new_passwords(
                         charset.read().as_bytes(),

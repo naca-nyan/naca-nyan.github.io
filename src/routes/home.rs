@@ -39,26 +39,26 @@ pub fn Home() -> Element {
     ];
     rsx! {
         TitleAndMeta { title: "Home", description: "なかにゃんのサイトだよ" }
-        div { class: "mx-auto container px-3 typography",
-            header { class: "my-10 flex flex-col items-center gap-5",
-                div { class: "max-w-[500px] w-full",
+        div { class: "typography",
+            header { class: "px-8 flex flex-col items-center gap-5",
+                div { class: "max-w-[400px] w-full",
                     img {
                         class: "rounded-full overflow-hidden",
                         src: asset!("/assets/icon.png"),
                     }
                 }
-                p { class: "font-extrabold text-3xl text-center", "なかにゃん @naca_nyan" }
+                p { class: "font-extrabold text-2xl text-center", "なかにゃん @naca_nyan" }
                 div { class: "flex gap-3",
                     for s in sns_list {
                         a { key: "{s.name}", href: s.href,
-                            img { class: "rounded-sm w-16", src: s.img }
+                            img { class: "rounded-sm w-12", src: s.img }
                         }
                     }
                 }
             }
-            h1 { class: "font-bold text-3xl", "便利なやつら" }
+            h1 { class: "mt-3 font-bold text-xl", "便利なやつら" }
             hr { class: "my-3" }
-            ul { class: "ms-6 list-disc text-xl",
+            ul { class: "ms-6 list-disc",
                 li {
                     Link { to: Route::Converter {}, "いろいろ変換するやつ" }
                 }

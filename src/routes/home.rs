@@ -56,6 +56,28 @@ pub fn Home() -> Element {
                     }
                 }
             }
+            h1 { class: "mt-3 font-bold text-xl", "つくったもの" }
+            hr { class: "my-3" }
+            ul { class: "ms-6 list-disc",
+                li {
+                    a { href: "https://prali.net", "prali.net" }
+                    p { "VRアイドルバンドPRA-LiNÉ公式サイト" }
+                }
+                li {
+                    a { href: "https://github.com/naca-nyan/vst-viseme", "vst-viseme" }
+                    p { "声の高さとかをVRCにOSC送信できるVSTPlugin" }
+                }
+                li {
+                    a { href: "https://syncroom-repertoire.web.app", "syncroom-repertoire.web.app" }
+                    p { "知ってる曲を登録できるウェブアプリ" }
+                }
+                li {
+                    a { href: "https://chromewebstore.google.com/detail/chordwiki-bold/jediokeakjffilhbalfckcncgoojmioe",
+                        "ChordWiki Bold"
+                    }
+                    p { "Chordwiki を見やすくするブラウザ拡張 (awawainu と共作)" }
+                }
+            }
             h1 { class: "mt-3 font-bold text-xl", "便利なやつら" }
             hr { class: "my-3" }
             ul { class: "ms-6 list-disc",

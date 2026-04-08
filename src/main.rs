@@ -79,7 +79,7 @@ fn TitleAndMeta(title: String, description: String) -> Element {
     rsx! {
         document::Title { "{title}" }
         document::Meta { name: "og:title", content: "{title}" }
-        document::Meta { name: "og:image", content: asset!("/assets/icon.png") }
+        document::Meta { name: "og:image", content: asset!("/assets/icon.webp") }
         document::Meta { name: "twitter:card", content: "summary" }
         document::Meta { name: "twitter:description", content: "{description}" }
         document::Meta { name: "twitter:site", content: "@naca-nyan" }
@@ -95,7 +95,7 @@ fn Navbar() -> Element {
                 Link { class: "flex items-center gap-3", to: Route::Home {},
                     img {
                         class: "w-14 rounded-full overflow-hidden",
-                        src: asset!("/assets/icon.png"),
+                        src: asset!("/assets/icon.webp"),
                     }
                     div { class: "text-xl font-serif",
                         span { class: "text-gray-500", "naca-nyan" }

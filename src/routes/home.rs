@@ -44,7 +44,7 @@ pub fn Home() -> Element {
                 div { class: "max-w-[400px] w-full",
                     img {
                         class: "rounded-full overflow-hidden",
-                        src: asset!("/assets/icon.png"),
+                        src: asset!("/assets/icon.webp"),
                     }
                 }
                 p { class: "font-extrabold text-2xl text-center", "なかにゃん @naca_nyan" }

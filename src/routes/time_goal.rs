@@ -39,10 +39,10 @@ pub fn TimeGoal() -> Element {
             title: "時間計算するやつ",
             description: "時間計算するよ",
         }
-        main { class: "typography ui",
+        main { class: "typography ui space-y-3",
             h1 { class: "text-xl font-semibold", "目標まであと何分？" }
-            hr { class: "my-3" }
-            div { class: "my-2 flex items-center gap-3",
+            hr {}
+            div { class: "flex items-center gap-3",
                 "目標"
                 input {
                     class: "p-1",
@@ -60,7 +60,7 @@ pub fn TimeGoal() -> Element {
                     *now.write() = (!e.value().is_empty()).then(now_minutes);
                 },
             }
-            div { class: "mt-3",
+            div {
                 if let Some(n) = now() {
                     p { "いま: {fmt(n)}" }
                     p { "経過時間: {fmt(elapsed)}" }

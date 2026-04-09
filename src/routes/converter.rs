@@ -67,11 +67,11 @@ pub fn Converter() -> Element {
             description: "べんりな数値変換ツールたち",
         }
 
-        main { class: "typography ui",
+        main { class: "typography ui space-y-3",
             h1 { class: "text-xl font-semibold", "いろいろ変換するやつ" }
-            hr { class: "my-3" }
+            hr {}
             h4 { "ボイチェンの％と半音単位こんばーた" }
-            div { class: "my-3 grid grid-cols-3 max-w-[600px] gap-1",
+            div { class: "grid grid-cols-3 max-w-[600px] gap-1",
                 label { "パーセント" }
                 input {
                     r#type: "number",
@@ -87,9 +87,9 @@ pub fn Converter() -> Element {
                 }
                 "st"
             }
-            hr { class: "my-3" }
+            hr {}
             h4 { "HzとBPMとms行ったり来たり" }
-            div { class: "my-3 grid grid-cols-3 max-w-[600px] gap-1",
+            div { class: "grid grid-cols-3 max-w-[600px] gap-1",
                 label { "Hz" }
                 input {
                     r#type: "number",
@@ -112,10 +112,10 @@ pub fn Converter() -> Element {
                 }
                 label {}
             }
-            hr { class: "my-3" }
+            hr {}
             h4 { "電子レンジ秒数くん" }
 
-            div { class: "my-3 grid grid-cols-4 max-w-[600px] gap-1",
+            div { class: "grid grid-cols-4 max-w-[600px] gap-1",
                 input {
                     r#type: "number",
                     step: 100,

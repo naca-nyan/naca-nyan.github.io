@@ -39,7 +39,7 @@ pub fn Home() -> Element {
     ];
     rsx! {
         TitleAndMeta { title: "Home", description: "なかにゃんのサイトだよ" }
-        div { class: "typography",
+        div { class: "typography space-y-3",
             header { class: "px-8 flex flex-col items-center gap-5",
                 div { class: "max-w-[400px] w-full",
                     img {
@@ -48,7 +48,7 @@ pub fn Home() -> Element {
                     }
                 }
                 p { class: "font-extrabold text-2xl text-center", "なかにゃん @naca_nyan" }
-                div { class: "flex gap-3",
+                div { class: "flex gap-3 items-center",
                     for s in sns_list {
                         a { key: "{s.name}", href: s.href,
                             img { class: "rounded-sm w-12", src: s.img }
@@ -56,8 +56,8 @@ pub fn Home() -> Element {
                     }
                 }
             }
-            h1 { class: "mt-3 font-bold text-xl", "つくったもの" }
-            hr { class: "my-3" }
+            h1 { class: "font-bold text-xl", "つくったもの" }
+            hr {}
             ul { class: "ms-6 list-disc",
                 li {
                     a { href: "https://prali.net", "prali.net" }
@@ -78,8 +78,8 @@ pub fn Home() -> Element {
                     p { "Chordwiki を見やすくするブラウザ拡張 (awawainu と共作)" }
                 }
             }
-            h1 { class: "mt-3 font-bold text-xl", "便利なやつら" }
-            hr { class: "my-3" }
+            h1 { class: "font-bold text-xl", "便利なやつら" }
+            hr {}
             ul { class: "ms-6 list-disc",
                 li {
                     Link { to: Route::Converter {}, "いろいろ変換するやつ" }

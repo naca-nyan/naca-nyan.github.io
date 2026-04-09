@@ -28,14 +28,14 @@ pub fn Password() -> Element {
         )
     });
     let mut passwords = use_signal(Vec::<String>::new);
-    let mut len = use_signal(|| String::from("12"));
+    let mut len = use_signal(|| String::from("16"));
 
     rsx! {
         TitleAndMeta {
             title: "パスワード作るやつ",
             description: "ランダムなパスワードをクライアント側で作るよ",
         }
-        main { class: "typography ui flex flex-col gap-3",
+        main { class: "typography ui space-y-3",
             h1 { class: "text-xl font-semibold", "パスワード作るやつ" }
             hr {}
             div {
@@ -58,7 +58,7 @@ pub fn Password() -> Element {
                 }
             }
             button {
-                class: "text-white bg-green-700 rounded p-3 w-auto",
+                class: "text-white bg-green-700 rounded px-3 py-1 w-auto",
                 onclick: move |_| {
                     *passwords.write() = new_passwords(
                         charset.read().as_bytes(),

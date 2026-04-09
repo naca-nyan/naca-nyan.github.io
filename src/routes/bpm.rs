@@ -47,10 +47,10 @@ pub fn BPM() -> Element {
             description: "ぽちぽちしてBPM計るやつ",
         }
 
-        main { class: "typography ui",
+        main { class: "typography ui space-y-3",
             h1 { class: "text-xl font-semibold", "BPM計るやつ" }
-            hr { class: "my-3" }
-            div { class: "my-3 grid grid-cols-2",
+            hr {}
+            div { class: "grid grid-cols-2",
                 button {
                     class: "text-white bg-green-700 rounded-md p-2 border",
                     onmounted: async move |e| e.set_focus(true).await.unwrap_or_default(),

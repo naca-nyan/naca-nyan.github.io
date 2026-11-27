@@ -52,13 +52,13 @@ pub fn BPM() -> Element {
             hr {}
             div { class: "grid grid-cols-2",
                 button {
-                    class: "text-white bg-green-700 rounded-md p-2 border",
+                    class: "text-white bg-green-700 rounded-md p-2 border touch-manipulation",
                     onmounted: async move |e| e.set_focus(true).await.unwrap_or_default(),
                     onclick: move |_| bpm.write().tap(),
                     "Tap"
                 }
                 button {
-                    class: "text-white bg-green-700 rounded-md px-3 py-1 border",
+                    class: "text-white bg-green-700 rounded-md px-3 py-1 border touch-manipulation",
                     onclick: move |_| bpm.write().reset(),
                     "Reset"
                 }
